@@ -13,51 +13,62 @@ class ShoppingHomePage extends StatelessWidget {
         appBar: new AppBar(
           title: Text("Flutter Cart"),
         ),
-        body: ShoppingList(),
+        body: ShoppingListItem(),
       ),
     );
   }
 }
 
-class ShoppingList extends StatelessWidget {
+class ShoppingListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return Container(
-      margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         border: Border.all(
-            width: 10.0, color: Colors.black, style: BorderStyle.solid),
+          width: 1.0,
+          color: Colors.black,
+        ),
       ),
+      margin: EdgeInsets.all(4.0),
       child: ShoppingItemStack(),
     );
   }
 }
 
-//Widget _gridView(){
-//  return Padding(
-//    padding: const ,
-//  )
-//}
-
 class ShoppingItemStack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[imageItem(), nameItem(), ratingItem()],
+    return Material(
+        elevation: 8.0,
+        child: InkWell(
+          onTap: () {
+            print("tapped");
+//          Navigator.of(context).push(
+//              new MaterialPageRoute(builder: (context) => new DetailPage()));
+          },
+          child: new Stack(fit: StackFit.expand, children: <Widget>[
+            ItemImage(),
+            ItemRating(),
+            ItemName(),
+          ]),
+        ));
+  }
+}
+
+class ItemImage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(
+      "https://assets.abfrlcdn.com/img/app/product/1/199775-614183-large.jpg",
+      fit: BoxFit.cover,
     );
   }
+}
 
-  Widget imageItem() {
-    return Container(
-      child: Image.network(
-        "https://assets.abfrlcdn.com/img/app/product/1/199775-614183-large.jpg",
-        fit: BoxFit.fill,
-      ),
-      color: Colors.pink,
-    );
-  }
-
-  Widget nameItem() {
+class ItemName extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -66,11 +77,12 @@ class ShoppingItemStack extends StatelessWidget {
         ),
         color: Colors.black,
         child: Padding(
-          padding: const EdgeInsets.all(0.0),
+          padding: const EdgeInsets.all(4.0),
           child: Center(
             child: Text(
               "Blue Shirt",
               style: new TextStyle(
+                fontSize: 18.0,
                 color: Colors.white,
               ),
             ),
@@ -79,39 +91,44 @@ class ShoppingItemStack extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget ratingItem() {
+class ItemRating extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
       child: Container(
-        constraints: BoxConstraints.tightFor(
-          height: 30.0,
-          width: 30.0,
-        ),
-        color: Colors.black,
+        decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              bottomLeft: Radius.circular(20.0),
+            )),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Icon(
-                  Icons.star,
-                  color: Colors.amber,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(
+                Icons.star,
+                color: Colors.yellow,
+                size: 18.0,
+              ),
+              const SizedBox(
+                width: 5.0,
+              ),
+              new Text(
+                "4.2",
+                maxLines: 1,
+                style: new TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 14.0,
                 ),
-                const SizedBox(
-                  width: 8.0,
-                ),
-                new Text(
-                  "4.2",
-                  style: new TextStyle(
-                    color: Colors.white,
-                    fontSize: 14.0,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
