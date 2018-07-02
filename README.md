@@ -1,4 +1,8 @@
-# flutter_app
+# Flutter Shopping Cart App
+
+Simple Shopping app using Flutter
+
+![](/flutter.gif)
 
 A new Flutter application.
 
