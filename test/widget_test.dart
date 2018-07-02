@@ -5,13 +5,13 @@
 // are correct.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/main.dart';
+import 'package:flutter_app/ShoppingListPage.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(new ShoppingHomePage());
+    await tester.pumpWidget(new ShoppingListPage());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
